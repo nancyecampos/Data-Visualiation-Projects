@@ -1,0 +1,8 @@
+Trend 1:
+In general, Charter Schools seemed to perform higher than district schools.
+Their overall passing rate was higher, however, they also had a lower number of students than the bottom performing schools.
+
+Trend 2: 
+When looking at the math and reading scores by grade breakdown, the average scores where higher in reading.
+In the district summary, the average reading score and the passing rate where both higher.
+This shows that the reading scores tended to be higher when looked in aggregate by district and when broken out by grade and school.
