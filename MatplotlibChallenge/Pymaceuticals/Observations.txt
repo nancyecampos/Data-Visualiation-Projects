@@ -1,0 +1,4 @@
+Observations:
+1. None of the drugs ensured a 100% survival rate, however, Capomulin had the highest survival rate. At the end of the trial, this drug's survival rate was in the mid 80s as opposed to mid 40s for the placebo group.
+
+2. Capomulin had the most successful reduction of tumor size. All others, including placebo had the tumor size grow.
