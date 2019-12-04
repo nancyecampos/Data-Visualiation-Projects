@@ -1,0 +1,10 @@
+Trends observed from WeatherPy Data:
+1. The temperature of the cities seemed to stay fairly consistent between latitude ranges -60 and 0.
+However, latitudes 0 and over had an obvious decrease in temperature.
+After this point, it appears that as the latitude increases, the temperature decreases.
+
+2. For latitude vs. humidity, the data points were very scattered.
+The latitudes with the most variations were clustered between -40 and -20, and 20 and 40.
+
+3. For cloudiness, I did not see any kind of correlation between cloudiness and latitude.
+It appears that latitude does not have any affect on cloudiness, based on the data observed. 
