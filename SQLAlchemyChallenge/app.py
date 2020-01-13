@@ -26,6 +26,7 @@ Measurement = Base.classes.measurement
 
 # Create our session (link) from Python to the DB
 session = Session(engine)
+conn = engine.connect()
 
 # Define dates to use
 # Find the latest date of record
@@ -47,18 +48,18 @@ app = Flask(__name__)
 def welcome():
     return (
         f"Available Routes:<br/>"
-        f"Precipitation Data: /api/v1.0/precipitiation<br/>"
+        f"Precipitation Data: /api/v1.0/precipitation<br/>"
         f"Station Data: /api/v1.0/stations<br/>"
         f"Temperature Obersvations: /api/v1.0/tobs<br/>"
-        f"Start date: /api/v1.0/&ltstart&gt, such as, /api/v1.0/2017-04-24<br/>"
-        f"Start and end date: /api/v1.0/&ltstart&gt/&ltend&gt, such as, /api/v1.0/2017-04-24/2017-04-29"
+        f"Enter a start date to get a temperature min, average, and max for that date: /api/v1.0/temp/&ltstart&gt, such as, /api/v1.0/temp/2017-04-24<br/>"
+        f"Enter a start and end date to get a temperature min, average, and max for those dates: /api/v1.0/temp/&ltstart&gt/&ltend&gt, such as, /api/v1.0/temp/2017-04-24/2017-04-29"
         )
 
 @app.route("/api/v1.0/precipitation")
 def precipitation():
     """Return precipitation data"""
     date_prcp = session.query(Measurement.date, func.avg(Measurement.prcp)).filter(Measurement.date>=oldest).group_by(Measurement.date).all()
-    
+
     date_prcp_dict = []
     for date, prcp in date_prcp:
         date_prcp_dict.append({str(date): prcp})
@@ -90,9 +91,9 @@ def tobs():
         tobs_dict.append({str(date): temp})
     return jsonify(tobs_dict)
 
-@app.route("/api/v1.0/<start>")
-@app.route("/api/v1.0/<start>/<end>")
-def start_end(start, end=oldest):
+@app.route("/api/v1.0/temp/<start>")
+@app.route("/api/v1.0/temp/<start>/<end>")
+def start_end(start, end=newest):
 
     '''
     Return the minimum temperature, the average temperature, and the max temperature for a given start or start-end range
