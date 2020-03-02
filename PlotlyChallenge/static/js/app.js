@@ -1,28 +1,26 @@
 // function to build out plots
-function Plot(id) {
+function getPlot(id) {
   // pull in data from json file (not in the same folder, specify file path)
   d3.json("../samples.json").then((data)=> {
       console.log(data)
 
-      var washfreq = data.metadata.map(d => d.washfreq)
-      console.log(`Washing Frequency: ${washfreq}`)
+      var wfreq = data.metadata.map(d => d.wfreq)
+      console.log(`Washing Frequency: ${wfreq}`)
       
       var samples = data.samples.filter(s => s.id.toString() === id)[0];
       
       console.log(samples);
 
       // Filter out the top 10
-      var samplevalue = samples.sample_values.slice(0, 10).reverse();
-      var OTU_topten = (samples.otu_ids.slice(0, 10)).reverse();
-      var OTU_id = OTU_topten.map(d => "OTU " + d)
-
-    //   console.log(`OTU IDS: ${OTU_id}`)
+      var samplevalues = samples.sample_values.slice(0, 10).reverse();
+      var OTU_top = (samples.otu_ids.slice(0, 10)).reverse();
+      var OTU_id = OTU_top.map(d => "OTU " + d)
 
 
       // get the top 10 labels for the bar plot
       var labels = samples.otu_labels.slice(0, 10);
       var trace = {
-          x: samplevalue,
+          x: samplevalues,
           y: OTU_id,
           text: labels,
           marker: {
@@ -80,7 +78,7 @@ function Plot(id) {
     });
 }  
 // function to pull in data
-function Info(id) {
+function getInfo(id) {
   // read the json file to get data
   d3.json("../samples.json").then((data)=> {
       
@@ -107,8 +105,8 @@ function Info(id) {
 
 // create a function to change info with each id
 function optionChanged(id) {
-  Plot(id);
-  Info(id);
+  getPlot(id);
+  getInfo(id);
 }
 
 // create a function to populate the inital data
@@ -126,8 +124,8 @@ function init() {
       });
 
       // use functions above to populate the data and the plots onto the html page
-      Plot(data.names[0]);
-      Info(data.names[0]);
+      getPlot(data.names[0]);
+      getInfo(data.names[0]);
   });
 }
 
